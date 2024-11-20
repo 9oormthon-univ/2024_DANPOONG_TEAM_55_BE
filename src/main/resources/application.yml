@@ -1,0 +1,62 @@
+spring:
+  application:
+    name: somtoring-api
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:somtoring_db}?useSSL=false&allowPublicKeyRetrieval=true
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:root}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      default_batch_fetch_size: 1000
+      jdbc:
+        time_zone: Asia/Seoul
+    defer-datasource-initialization: true
+    show-sql: true
+    open-in-view: false
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD}
+  security:
+    login-url: ${LOGIN_URL:/login}
+    redirect-url: ${REDIRECT_URL:/}
+    new-user-redirect-url: ${NEW_USER_REDIRECT_URL:/}
+    cookie:
+      domain: ${COOKIE_DOMAIN:localhost}
+      secure: ${COOKIE_SECURE:true}
+      http-only: ${COOKIE_HTTP_ONLY:true}
+    oauth2:
+      client:
+        provider:
+            kakao:
+                authorization-uri: https://kauth.kakao.com/oauth/authorize
+                token-uri: https://kauth.kakao.com/oauth/token
+                user-info-uri: https://kapi.kakao.com/v2/user/me
+                user-name-attribute: id
+        registration:
+            kakao:
+                client-id: ${KAKAO_CLIENT_ID}
+                client-secret: ${KAKAO_CLIENT_SECRET}
+                client-authentication-method: client_secret_post
+                redirect-uri: ${KAKAO_REDIRECT_URI:http://localhost:8080/login/oauth2/code/kakao}
+                authorization-grant-type: authorization_code
+                client-name: kakao
+                scope:
+                    - account_email
+                    - profile_image
+
+springdoc:
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  swagger-ui:
+    operations-sorter: alpha
+    tags-sorter: alpha
+
+jwt:
+  secret-key: ${JWT_SECRET_KEY}
+  expiration-time:
+    access-token: ${JWT_EXPIRATION_TIME_ACCESS_TOKEN:3600}
+    refresh-token: ${JWT_EXPIRATION_TIME_REFRESH_TOKEN:7776000}
