@@ -10,6 +10,7 @@ import goormthon.somtoring.common.auth.domain.RefreshTokenRepository;
 import goormthon.somtoring.common.auth.domain.jwt.TokenGenerator;
 import goormthon.somtoring.common.auth.infrastructure.jwt.TokenProperties;
 import goormthon.somtoring.common.auth.presentation.exception.AlreadyRegisteredUserException;
+import goormthon.somtoring.common.util.RandomNicknameGenerator;
 import goormthon.somtoring.domain.user.domain.User;
 import goormthon.somtoring.domain.user.domain.UserRepository;
 
@@ -21,6 +22,7 @@ public class AuthService {
 
 	private final UserRepository userRepository;
 	private final TokenGenerator tokenGenerator;
+	private final RandomNicknameGenerator randomNicknameGenerator;
 	private final RefreshTokenRepository refreshTokenRepository;
 	private final TokenProperties tokenProperties;
 
@@ -62,6 +64,7 @@ public class AuthService {
 
 	private User saveNewUser(AuthAttributes attributes) {
 		User user = User.from(attributes);
+		user.generateNickname(randomNicknameGenerator.generate());
 		return userRepository.save(user);
 	}
 }
