@@ -35,10 +35,23 @@ public class User extends BaseTimeEntity {
 	@Column(nullable = false)
 	private String email;
 
+	private String nickname;
+
 	@Enumerated(STRING)
 	private LoginProvider loginProvider;
 
 	private String externalId;
+
+	@Enumerated(STRING)
+	private Role role;
+
+	public void selectRole(Role role) {
+		this.role = role;
+	}
+
+	public void generateNickname(String nickname) {
+		this.nickname = nickname;
+	}
 
 	private User(String email, LoginProvider loginProvider, String externalId) {
 		this.email = email;

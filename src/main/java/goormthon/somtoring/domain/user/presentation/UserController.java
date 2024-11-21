@@ -1,0 +1,55 @@
+package goormthon.somtoring.domain.user.presentation;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import goormthon.somtoring.common.resolver.UserId;
+import goormthon.somtoring.domain.user.application.UserService;
+import goormthon.somtoring.domain.user.domain.Role;
+import goormthon.somtoring.domain.user.presentation.response.UserDetailResponse;
+import goormthon.somtoring.domain.user.presentation.response.UserNicknameResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/users")
+@Tag(name = "유저", description = "유저 관리 api")
+public class UserController {
+	private final UserService userService;
+
+	@Operation(summary = "유저 역할 선택", description = "MENTOR / MENTEE 중 한 가지 역할을 선택합니다.")
+	@ApiResponse(responseCode = "200", description = "성공")
+	@PatchMapping("/role")
+	public ResponseEntity<Void> selectUserRole (
+		@UserId Long userId,
+		@RequestParam Role role
+	) {
+		userService.selectUserRole(userId, role);
+		return ResponseEntity.ok().build();
+	}
+
+	@Operation(summary = "유저 정보 조회", description = "유저 정보를 조회합니다.")
+	@ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = UserDetailResponse.class)))
+	@GetMapping("/me")
+	public ResponseEntity<UserDetailResponse> getUser(@UserId Long userId) {
+		UserDetailResponse response = userService.getUserMe(userId);
+		return ResponseEntity.ok(response);
+	}
+
+	@Operation(summary = "유저 닉네임 조회", description = "회원가입 이후 유저 닉네임을 조회합니다.")
+	@ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = UserNicknameResponse.class)))
+	@GetMapping("/nickname")
+	public ResponseEntity<UserNicknameResponse> getUserNickname(@UserId Long userId) {
+		UserNicknameResponse nickname = userService.getUserNickname(userId);
+		return ResponseEntity.ok(nickname);
+	}
+}
