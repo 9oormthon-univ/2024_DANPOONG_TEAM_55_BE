@@ -2,7 +2,10 @@ package goormthon.somtoring.domain.question.presentation;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import goormthon.somtoring.common.resolver.UserId;
@@ -29,4 +32,17 @@ public class QuestionController {
 		QuestionResponse response = questionService.getNextQuestion(userId);
 		return ResponseEntity.ok(response);
 	}
+
+	@Operation(summary = "VARKI 검사 단건 질문 답변", description = "VARKI 검사 단건 질문에 답변합니다.")
+	@ApiResponse(responseCode = "204")
+	@PostMapping("/{questionId}")
+	public ResponseEntity<Void> answerQuestion(
+		@UserId Long userId,
+		@PathVariable Long questionId,
+		@RequestParam Long answerId
+	) {
+		questionService.answerQuestion(userId, questionId, answerId);
+		return ResponseEntity.noContent().build();
+	}
+
 }

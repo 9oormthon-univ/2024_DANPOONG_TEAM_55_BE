@@ -36,7 +36,15 @@ public class UserQuestion {
 	@JoinColumn(name = "question_id")
 	private Question question;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "answer_id")
 	private Answer answer;
+
+	public static UserQuestion of(User user, Question question, Answer answer) {
+		return UserQuestion.builder()
+			.user(user)
+			.question(question)
+			.answer(answer)
+			.build();
+	}
 }

@@ -16,6 +16,11 @@ public class UserQuestionRepositoryImpl implements UserQuestionRepository {
 	private final UserQuestionQueryRepository userQuestionQueryRepository;
 
 	@Override
+	public void save(UserQuestion userQuestion) {
+		userQuestionJpaRepository.save(userQuestion);
+	}
+
+	@Override
 	public List<Long> findAnsweredQuestionIds(Long userId) {
 		return userQuestionQueryRepository.findAnsweredQuestionIds(userId);
 	}
