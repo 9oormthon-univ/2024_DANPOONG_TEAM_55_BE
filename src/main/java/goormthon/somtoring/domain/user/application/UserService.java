@@ -24,15 +24,11 @@ public class UserService {
 	}
 
 	public UserNicknameResponse getUserNickname(Long userId) {
-		return UserNicknameResponse.from(me(userId));
+		return UserNicknameResponse.from(getByUserId(userId));
 	}
 
 	public UserDetailResponse getUserMe(Long userId) {
-		return UserDetailResponse.from(me(userId));
-	}
-
-	public User me(Long userId) {
-		return getByUserId(userId);
+		return UserDetailResponse.from(getByUserId(userId));
 	}
 
 	public User getByUserId(Long userId) {
