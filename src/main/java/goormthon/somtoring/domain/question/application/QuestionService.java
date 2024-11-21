@@ -27,7 +27,8 @@ public class QuestionService {
 			.filter(question -> !answeredQuestionIds.contains(question.getId()))
 			.findFirst()
 			.orElseThrow(UnansweredQuestionNotExistsException::new);
-		return QuestionResponse.of(nextQuestion, nextQuestion.getAnswers());
+		return QuestionResponse.of(nextQuestion, nextQuestion.getAnswers(), questions.size(),
+			answeredQuestionIds.size()+1);
 	}
 
 	public void answerQuestion(Long userId, Long questionId, Long answerId) {
