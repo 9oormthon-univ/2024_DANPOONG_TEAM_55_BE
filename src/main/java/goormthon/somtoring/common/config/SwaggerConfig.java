@@ -26,7 +26,8 @@ public class SwaggerConfig {
 	private final Environment environment;
 
 	private static final Map<String, String> PROFILE_SERVER_URL_MAP = Map.of(
-		"local", "http://localhost:8080"
+		"local", "http://localhost:8080",
+		"dev", "https://58.238.255.245:8080"
 	);
 
 	@Bean
@@ -78,7 +79,8 @@ public class SwaggerConfig {
 				Local Login Page: <a href="%s" target="_blank">%s</a>\n\n
 				쿠키에 액세스 토큰이 저장되며, 별다른 절차 없이 API를 사용하실 수 있습니다.\n\n
 				""",
-				getLoginUrlByProfile("local"), getLoginUrlByProfile("local")
+				getLoginUrlByProfile("local"), getLoginUrlByProfile("local"),
+				getLoginUrlByProfile("dev"), getLoginUrlByProfile("dev")
 			);
 	}
 
