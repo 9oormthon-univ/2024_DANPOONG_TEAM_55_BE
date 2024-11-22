@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import goormthon.somtoring.common.auth.domain.CustomUserDetails;
-import goormthon.somtoring.domain.user.domain.User;
-import goormthon.somtoring.domain.user.domain.UserRepository;
+import goormthon.somtoring.domain.user.domain.user.User;
+import goormthon.somtoring.domain.user.domain.user.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 

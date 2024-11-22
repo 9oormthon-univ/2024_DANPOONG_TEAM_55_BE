@@ -21,3 +21,27 @@ INSERT INTO answer (question_id, content, score) VALUES
 (5, '바로 해볼 수 있는 게 좋지! 실생활에서 바로 써볼래!', 30),
 (5, '일단 배우고 정리한 다음에 차근차근 써볼래', 20),
 (5, '나중에 필요할 때 활용할 준비만 해두면 될 것 같아', 10);
+
+INSERT INTO user (email, nickname, role, university, additional_info, sugar, v, a, r, k, i, created_at, updated_at) VALUES
+('goorm1@gmail.com', '귀여운 뭉게구름', 'MENTOR', '구름대 서울캠', '20학번, 재학생', 70, 30, 20, 10, 20, 30, NOW(), NOW()),
+('goorm2@gmail.com', '싱그러운 안개', 'MENTOR', '구름대 서울캠', '22학번, 재학생', 50, 10, 20, 30, 10, 30, NOW(), NOW()),
+('goorm3@gmail.com', '상큼한 햇살', 'MENTOR', '구름대 서울캠', '21학번, 재학생', 60, 20, 15, 25, 20, 30, NOW(), NOW()),
+('goorm4@gmail.com', '부드러운 바람', 'MENTOR', '구름대 서울캠', '23학번, 재학생', 40, 10, 10, 20, 15, 25, NOW(), NOW()),
+('goorm5@gmail.com', '잔잔한 호수', 'MENTOR', '구름대 서울캠', '22학번, 재학생', 55, 15, 25, 15, 20, 30, NOW(), NOW());
+
+INSERT INTO user_tag (user_id, content) VALUES
+(1, '친절한'),
+(1, '편안한'),
+(1, '유쾌한'),
+(2, '친절한'),
+(2, '유쾌한'),
+(2, '편안한'),
+(3, '친절한'),
+(3, '유쾌한'),
+(3, '편안한'),
+(4, '친절한'),
+(4, '유쾌한'),
+(4, '편안한'),
+(5, '친절한'),
+(5, '유쾌한'),
+(5, '편안한');

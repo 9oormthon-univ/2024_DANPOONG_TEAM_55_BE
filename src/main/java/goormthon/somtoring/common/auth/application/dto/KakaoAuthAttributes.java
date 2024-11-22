@@ -2,7 +2,7 @@ package goormthon.somtoring.common.auth.application.dto;
 
 import java.util.Map;
 
-import goormthon.somtoring.domain.user.domain.LoginProvider;
+import goormthon.somtoring.domain.user.domain.user.LoginProvider;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

@@ -3,13 +3,15 @@ package goormthon.somtoring.domain.user.presentation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import goormthon.somtoring.common.resolver.UserId;
 import goormthon.somtoring.domain.user.application.UserService;
-import goormthon.somtoring.domain.user.domain.Role;
+import goormthon.somtoring.domain.user.domain.user.Role;
+import goormthon.somtoring.domain.user.presentation.request.UserAdditionalRequest;
 import goormthon.somtoring.domain.user.presentation.response.UserDetailResponse;
 import goormthon.somtoring.domain.user.presentation.response.UserNicknameResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,7 +29,7 @@ public class UserController {
 	private final UserService userService;
 
 	@Operation(summary = "유저 역할 선택", description = "MENTOR / MENTEE 중 한 가지 역할을 선택합니다.")
-	@ApiResponse(responseCode = "200", description = "성공")
+	@ApiResponse(responseCode = "200")
 	@PatchMapping("/role")
 	public ResponseEntity<Void> selectUserRole (
 		@UserId Long userId,
@@ -37,7 +39,7 @@ public class UserController {
 		return ResponseEntity.ok().build();
 	}
 
-	@Operation(summary = "유저 정보 조회", description = "유저 정보를 조회합니다.")
+	@Operation(summary = "내 프로필 정보 조회", description = "내 프로필 기본 정보 및 varki 지수를 조회합니다.")
 	@ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = UserDetailResponse.class)))
 	@GetMapping("/me")
 	public ResponseEntity<UserDetailResponse> getUser(@UserId Long userId) {
@@ -52,4 +54,16 @@ public class UserController {
 		UserNicknameResponse nickname = userService.getUserNickname(userId);
 		return ResponseEntity.ok(nickname);
 	}
+
+	@Operation(summary = "유저 추가 정보 입력", description = "유저 추가 정보를 입력합니다.")
+	@ApiResponse(responseCode = "200")
+	@PatchMapping
+	public ResponseEntity<Void> updateUserAdditionalInfo(
+		@UserId Long userId,
+		@RequestBody UserAdditionalRequest request
+	) {
+		userService.updateUserAdditionalInfo(userId, request);
+		return ResponseEntity.ok().build();
+	}
+
 }

@@ -3,9 +3,10 @@ package goormthon.somtoring.domain.userQuestion.domain;
 import static lombok.AccessLevel.PRIVATE;
 import static lombok.AccessLevel.PROTECTED;
 
+import goormthon.somtoring.common.domain.BaseTimeEntity;
 import goormthon.somtoring.domain.answer.domain.Answer;
 import goormthon.somtoring.domain.question.domain.Question;
-import goormthon.somtoring.domain.user.domain.User;
+import goormthon.somtoring.domain.user.domain.user.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor(access = PRIVATE)
-public class UserQuestion {
+public class UserQuestion extends BaseTimeEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

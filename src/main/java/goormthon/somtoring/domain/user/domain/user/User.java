@@ -1,19 +1,25 @@
-package goormthon.somtoring.domain.user.domain;
+package goormthon.somtoring.domain.user.domain.user;
 
 import static jakarta.persistence.EnumType.STRING;
 import static lombok.AccessLevel.PRIVATE;
 import static lombok.AccessLevel.PROTECTED;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import goormthon.somtoring.common.auth.application.dto.AuthAttributes;
 import goormthon.somtoring.common.domain.BaseTimeEntity;
+import goormthon.somtoring.domain.user.domain.tag.UserTag;
+import goormthon.somtoring.domain.user.presentation.exception.InaccurateSugarValueException;
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,12 +51,43 @@ public class User extends BaseTimeEntity {
 	@Enumerated(STRING)
 	private Role role;
 
+	private String university;
+
+	private String additionalInfo;
+
+	private int sugar;
+
+	@Embedded
+	private Varki varki;
+
+	@OneToMany(mappedBy = "user", orphanRemoval = true)
+	private List<UserTag> userTags = new ArrayList<>();
+
+	public void updateVarki(Varki varki) {
+		this.varki = varki;
+	}
+
 	public void selectRole(Role role) {
 		this.role = role;
 	}
 
+	public void updateUniversity(String university) {
+		this.university = university;
+	}
+
+	public void updateAdditionalInfo(String additionalInfo) {
+		this.additionalInfo = additionalInfo;
+	}
+
 	public void generateNickname(String nickname) {
 		this.nickname = nickname;
+	}
+
+	public void setSugar(int sugar) {
+		if (sugar < 0 || sugar > 100) {
+			throw new InaccurateSugarValueException();
+		}
+		this.sugar = sugar;
 	}
 
 	private User(String email, LoginProvider loginProvider, String externalId) {
