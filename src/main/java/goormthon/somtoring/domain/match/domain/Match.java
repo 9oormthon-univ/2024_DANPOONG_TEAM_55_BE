@@ -4,11 +4,13 @@ import goormthon.somtoring.common.domain.BaseTimeEntity;
 import goormthon.somtoring.domain.match.presentation.exception.AlreadyAcceptedMatchException;
 import goormthon.somtoring.domain.user.domain.user.User;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +20,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 @Builder
+@Table(name = "\"match\"")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Match extends BaseTimeEntity {
@@ -25,11 +28,11 @@ public class Match extends BaseTimeEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "mentor_id")
 	private User mentor;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "mentee_id")
 	private User mentee;
 
@@ -44,9 +47,11 @@ public class Match extends BaseTimeEntity {
 	}
 
 	public void accept() {
-		if(this.isAccepted) {
-			throw new AlreadyAcceptedMatchException();
-		}
+		if(this.isAccepted) throw new AlreadyAcceptedMatchException();
 		this.isAccepted = true;
+	}
+
+	public boolean isMentor(User user) {
+		return this.mentor.equals(user);
 	}
 }
