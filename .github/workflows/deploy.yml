@@ -49,5 +49,5 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
           script: |
-            sudo docker-compose -f /root/docker-compose.yml pull
-            sudo docker-compose -f /root/docker-compose.yml up -d
+            echo "${{ secrets.SERVER_PASSWORD }}" | sudo -S docker-compose -f /home/haneum/docker-compose.yml pull
+            echo "${{ secrets.SERVER_PASSWORD }}" | sudo -S docker-compose -f /home/haneum/docker-compose.yml up -d
