@@ -51,7 +51,7 @@ public class SwaggerConfig {
 	private List<Server> initializeServers() {
 		return PROFILE_SERVER_URL_MAP.entrySet().stream()
 			.filter(entry -> environment.matchesProfiles(entry.getKey()))
-			.map(entry -> openApiServer(entry.getValue(), "MENTOS API " + entry.getKey().toUpperCase()))
+			.map(entry -> openApiServer(entry.getValue(), "SOMTORING API " + entry.getKey().toUpperCase()))
 			.collect(Collectors.toList());
 	}
 
