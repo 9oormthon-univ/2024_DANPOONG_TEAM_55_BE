@@ -1,14 +1,14 @@
-package goormthon.somtoring.domain.userQuestion.domain;
+package goormthon.somtoring.domain.user.domain.tag;
 
+import static jakarta.persistence.FetchType.LAZY;
+import static jakarta.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PRIVATE;
 import static lombok.AccessLevel.PROTECTED;
 
-import goormthon.somtoring.domain.answer.domain.Answer;
-import goormthon.somtoring.domain.question.domain.Question;
 import goormthon.somtoring.domain.user.domain.user.User;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -22,28 +22,22 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor(access = PRIVATE)
-public class UserQuestion {
+public class UserTag {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
 	private Long id;
 
-	@ManyToOne
+	@Column(nullable = false)
+	private String content;
+
+	@ManyToOne(fetch = LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@ManyToOne
-	@JoinColumn(name = "question_id")
-	private Question question;
-
-	@ManyToOne
-	@JoinColumn(name = "answer_id")
-	private Answer answer;
-
-	public static UserQuestion of(User user, Question question, Answer answer) {
-		return UserQuestion.builder()
+	public static UserTag of(String content, User user) {
+		return UserTag.builder()
+			.content(content)
 			.user(user)
-			.question(question)
-			.answer(answer)
 			.build();
 	}
 }

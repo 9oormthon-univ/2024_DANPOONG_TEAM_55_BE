@@ -2,8 +2,8 @@ package goormthon.somtoring.domain.user.presentation.response;
 
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
-import goormthon.somtoring.domain.user.domain.Role;
-import goormthon.somtoring.domain.user.domain.User;
+import goormthon.somtoring.domain.user.domain.user.Role;
+import goormthon.somtoring.domain.user.domain.user.User;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 

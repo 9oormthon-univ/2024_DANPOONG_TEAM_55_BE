@@ -1,19 +1,23 @@
-package goormthon.somtoring.domain.user.domain;
+package goormthon.somtoring.domain.user.domain.user;
 
 import static jakarta.persistence.EnumType.STRING;
 import static lombok.AccessLevel.PRIVATE;
 import static lombok.AccessLevel.PROTECTED;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import goormthon.somtoring.common.auth.application.dto.AuthAttributes;
 import goormthon.somtoring.common.domain.BaseTimeEntity;
+import goormthon.somtoring.domain.user.domain.tag.UserTag;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,8 +49,27 @@ public class User extends BaseTimeEntity {
 	@Enumerated(STRING)
 	private Role role;
 
+	private String university;
+
+	private String additionalInfo;
+
+	@OneToMany(mappedBy = "user", orphanRemoval = true)
+	private List<UserTag> userTags = new ArrayList<>();
+
 	public void selectRole(Role role) {
 		this.role = role;
+	}
+
+	public void updateUniversity(String university) {
+		this.university = university;
+	}
+
+	public void updateAdditionalInfo(String additionalInfo) {
+		this.additionalInfo = additionalInfo;
+	}
+
+	public void addUserTag(UserTag userTag) {
+		userTags.add(userTag);
 	}
 
 	public void generateNickname(String nickname) {

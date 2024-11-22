@@ -1,4 +1,4 @@
-package goormthon.somtoring.domain.user.domain;
+package goormthon.somtoring.domain.user.domain.user;
 
 import java.util.Objects;
 

@@ -9,7 +9,7 @@ import goormthon.somtoring.domain.answer.application.AnswerService;
 import goormthon.somtoring.domain.answer.domain.Answer;
 import goormthon.somtoring.domain.question.domain.Question;
 import goormthon.somtoring.domain.user.application.UserService;
-import goormthon.somtoring.domain.user.domain.User;
+import goormthon.somtoring.domain.user.domain.user.User;
 import goormthon.somtoring.domain.userQuestion.domain.UserQuestion;
 import goormthon.somtoring.domain.userQuestion.domain.UserQuestionRepository;
 import lombok.RequiredArgsConstructor;
