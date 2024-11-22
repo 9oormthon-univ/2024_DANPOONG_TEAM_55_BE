@@ -38,4 +38,24 @@ public class Question {
 
 	@OneToMany(mappedBy = "question")
 	private List<Answer> answers;
+
+	public boolean isV() {
+		return type == Type.V;
+	}
+
+	public boolean isA() {
+		return type == Type.A;
+	}
+
+	public boolean isR() {
+		return type == Type.R;
+	}
+
+	public boolean isK() {
+		return type == Type.K;
+	}
+
+	public boolean isI() {
+		return type == Type.I;
+	}
 }

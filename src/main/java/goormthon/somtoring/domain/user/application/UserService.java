@@ -13,6 +13,7 @@ import goormthon.somtoring.domain.user.presentation.exception.UserNotFoundExcept
 import goormthon.somtoring.domain.user.presentation.request.UserAdditionalRequest;
 import goormthon.somtoring.domain.user.presentation.response.UserDetailResponse;
 import goormthon.somtoring.domain.user.presentation.response.UserNicknameResponse;
+import goormthon.somtoring.domain.userQuestion.application.UserQuestionService;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -21,11 +22,13 @@ public class UserService {
 
 	private final UserRepository userRepository;
 	private final UserTagService userTagService;
+	private final UserQuestionService userQuestionService;
 
 	@Transactional
 	public void selectUserRole(Long userId, Role role) {
 		User user = getByUserId(userId);
 		user.selectRole(role);
+		user.setSugar(50);
 	}
 
 	public UserNicknameResponse getUserNickname(Long userId) {
@@ -44,8 +47,11 @@ public class UserService {
 		userTagService.saveUserTags(userTags);
 	}
 
+	@Transactional(readOnly = true)
 	public UserDetailResponse getUserMe(Long userId) {
-		return UserDetailResponse.from(getByUserId(userId));
+		User user = getByUserId(userId);
+		if (user.getVarki() == null) userQuestionService.calculateVarki(user);
+		return UserDetailResponse.from(user);
 	}
 
 	public User getByUserId(Long userId) {

@@ -39,7 +39,7 @@ public class UserController {
 		return ResponseEntity.ok().build();
 	}
 
-	@Operation(summary = "유저 정보 조회", description = "유저 정보를 조회합니다.")
+	@Operation(summary = "내 프로필 정보 조회", description = "내 프로필 기본 정보 및 varki 지수를 조회합니다.")
 	@ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = UserDetailResponse.class)))
 	@GetMapping("/me")
 	public ResponseEntity<UserDetailResponse> getUser(@UserId Long userId) {
@@ -65,4 +65,5 @@ public class UserController {
 		userService.updateUserAdditionalInfo(userId, request);
 		return ResponseEntity.ok().build();
 	}
+
 }

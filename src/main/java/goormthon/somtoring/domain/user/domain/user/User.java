@@ -11,7 +11,9 @@ import java.util.Objects;
 import goormthon.somtoring.common.auth.application.dto.AuthAttributes;
 import goormthon.somtoring.common.domain.BaseTimeEntity;
 import goormthon.somtoring.domain.user.domain.tag.UserTag;
+import goormthon.somtoring.domain.user.presentation.exception.InaccurateSugarValueException;
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
@@ -53,8 +55,17 @@ public class User extends BaseTimeEntity {
 
 	private String additionalInfo;
 
+	private int sugar;
+
+	@Embedded
+	private Varki varki;
+
 	@OneToMany(mappedBy = "user", orphanRemoval = true)
 	private List<UserTag> userTags = new ArrayList<>();
+
+	public void updateVarki(Varki varki) {
+		this.varki = varki;
+	}
 
 	public void selectRole(Role role) {
 		this.role = role;
@@ -68,12 +79,15 @@ public class User extends BaseTimeEntity {
 		this.additionalInfo = additionalInfo;
 	}
 
-	public void addUserTag(UserTag userTag) {
-		userTags.add(userTag);
-	}
-
 	public void generateNickname(String nickname) {
 		this.nickname = nickname;
+	}
+
+	public void setSugar(int sugar) {
+		if (sugar < 0 || sugar > 100) {
+			throw new InaccurateSugarValueException();
+		}
+		this.sugar = sugar;
 	}
 
 	private User(String email, LoginProvider loginProvider, String externalId) {

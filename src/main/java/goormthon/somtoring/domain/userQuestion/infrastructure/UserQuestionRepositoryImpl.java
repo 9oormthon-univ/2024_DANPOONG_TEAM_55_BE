@@ -24,4 +24,9 @@ public class UserQuestionRepositoryImpl implements UserQuestionRepository {
 	public List<Long> findAnsweredQuestionIds(Long userId) {
 		return userQuestionQueryRepository.findAnsweredQuestionIds(userId);
 	}
+
+	@Override
+	public List<UserQuestion> findAllByUserId(Long userId) {
+		return userQuestionJpaRepository.findAllByUserId(userId);
+	}
 }

@@ -7,4 +7,6 @@ public interface UserQuestionRepository {
 	void save(UserQuestion userQuestion);
 	List<Long> findAnsweredQuestionIds(Long userId);
 
+	List<UserQuestion> findAllByUserId(Long userId);
+
 }
