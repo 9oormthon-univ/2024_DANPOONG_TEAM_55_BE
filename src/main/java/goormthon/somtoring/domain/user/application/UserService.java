@@ -70,4 +70,9 @@ public class UserService {
 		return userRepository.findById(userId)
 			.orElseThrow(UserNotFoundException::new);
 	}
+
+	public User getByUserIdAndRole(Long userId, Role role) {
+		return userRepository.findByIdAndRole(userId, role)
+			.orElseThrow(UserNotFoundException::new);
+	}
 }
