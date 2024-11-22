@@ -37,4 +37,14 @@ public class UserRepositoryImpl implements UserRepository {
 	public List<User> findAllByRoleAndVarki(Role role, Varki varki) {
 		return userQueryRepository.findAllByRoleAndVarki(role, varki);
 	}
+
+	@Override
+	public Optional<User> findByIdAndRole(Long userId, Role role) {
+		return userJpaRepository.findByIdAndRole(userId, role);
+	}
+
+	@Override
+	public List<User> findByRole(Role role) {
+		return userJpaRepository.findByRole(role);
+	}
 }

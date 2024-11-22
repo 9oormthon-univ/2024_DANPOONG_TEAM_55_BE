@@ -12,4 +12,7 @@ import goormthon.somtoring.domain.user.domain.user.Varki;
 public interface UserJpaRepository extends JpaRepository<User, Long> {
 	Optional<User> findByEmail(String email);
 
+	Optional<User> findByIdAndRole(Long userid, Role role);
+
+	List<User> findByRole(Role role);
 }

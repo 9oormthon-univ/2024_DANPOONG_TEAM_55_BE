@@ -1,6 +1,7 @@
 package goormthon.somtoring.domain.match.domain;
 
 import goormthon.somtoring.common.domain.BaseTimeEntity;
+import goormthon.somtoring.domain.match.presentation.exception.AlreadyAcceptedMatchException;
 import goormthon.somtoring.domain.user.domain.user.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,5 +41,12 @@ public class Match extends BaseTimeEntity {
 			.mentee(mentee)
 			.isAccepted(false)
 			.build();
+	}
+
+	public void accept() {
+		if(this.isAccepted) {
+			throw new AlreadyAcceptedMatchException();
+		}
+		this.isAccepted = true;
 	}
 }

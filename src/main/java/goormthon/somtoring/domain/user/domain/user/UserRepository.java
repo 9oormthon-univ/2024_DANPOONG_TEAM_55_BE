@@ -12,4 +12,8 @@ public interface UserRepository {
 	Optional<User> findByEmail(String email);
 
 	List<User> findAllByRoleAndVarki(Role role, Varki varki);
+
+	Optional<User> findByIdAndRole(Long userid, Role role);
+
+	List<User> findByRole(Role role);
 }
