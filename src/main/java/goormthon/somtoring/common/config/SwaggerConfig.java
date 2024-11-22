@@ -27,7 +27,7 @@ public class SwaggerConfig {
 
 	private static final Map<String, String> PROFILE_SERVER_URL_MAP = Map.of(
 		"local", "http://localhost:8080",
-		"dev", "https://58.238.255.245:8080"
+		"dev", "http://58.238.255.245:8080"
 	);
 
 	@Bean
@@ -77,6 +77,7 @@ public class SwaggerConfig {
 				멘토멘티 서비스, SOMTORING API 입니다.\n\n
 				로그인 페이지에 접속 후, 카카오 로그인을 수행하세요.\n\n
 				Local Login Page: <a href="%s" target="_blank">%s</a>\n\n
+				Dev Login Page: <a href="%s" target="_blank">%s</a>\n\n
 				쿠키에 액세스 토큰이 저장되며, 별다른 절차 없이 API를 사용하실 수 있습니다.\n\n
 				""",
 				getLoginUrlByProfile("local"), getLoginUrlByProfile("local"),
