@@ -14,6 +14,8 @@ import goormthon.somtoring.domain.user.domain.user.Role;
 import goormthon.somtoring.domain.user.presentation.request.UserAdditionalRequest;
 import goormthon.somtoring.domain.user.presentation.response.UserDetailResponse;
 import goormthon.somtoring.domain.user.presentation.response.UserNicknameResponse;
+import goormthon.somtoring.domain.user.presentation.response.UserSummaryListResponse;
+import goormthon.somtoring.domain.user.presentation.response.UserSummaryResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -47,7 +49,7 @@ public class UserController {
 		return ResponseEntity.ok(response);
 	}
 
-	@Operation(summary = "유저 닉네임 조회", description = "회원가입 이후 유저 닉네임을 조회합니다.")
+	@Operation(summary = "내 닉네임 조회", description = "회원가입 이후 내 닉네임을 조회합니다.")
 	@ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = UserNicknameResponse.class)))
 	@GetMapping("/nickname")
 	public ResponseEntity<UserNicknameResponse> getUserNickname(@UserId Long userId) {
@@ -64,6 +66,14 @@ public class UserController {
 	) {
 		userService.updateUserAdditionalInfo(userId, request);
 		return ResponseEntity.ok().build();
+	}
+
+	@Operation(summary = "내 VARKI 지수와 유사한 멘토 상위 5명 목록 조회", description = "내 VARKI 지수와 유사한 멘토 상위 5명의 목록을 조회합니다.")
+	@ApiResponse(responseCode = "200")
+	@GetMapping("/mentors")
+	public ResponseEntity<UserSummaryListResponse> getMentors(@UserId Long userId) {
+		UserSummaryListResponse response = userService.getMentors(userId);
+		return ResponseEntity.ok(response);
 	}
 
 }
