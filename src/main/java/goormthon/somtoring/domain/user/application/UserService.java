@@ -52,7 +52,7 @@ public class UserService {
 	}
 
 	@Transactional
-	public UserDetailResponse getUserMe(Long userId) {
+	public UserDetailResponse getUser(Long userId) {
 		User user = getByUserId(userId);
 		if (user.getVarki() == null) userQuestionService.calculateVarki(user);
 		return UserDetailResponse.from(user);
