@@ -9,4 +9,6 @@ public interface UserQuestionRepository {
 
 	List<UserQuestion> findAllByUserId(Long userId);
 
+	void deleteAllByUserId(Long userId);
+
 }

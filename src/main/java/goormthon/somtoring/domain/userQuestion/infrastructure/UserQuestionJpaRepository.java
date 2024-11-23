@@ -8,4 +8,6 @@ import goormthon.somtoring.domain.userQuestion.domain.UserQuestion;
 
 public interface UserQuestionJpaRepository extends JpaRepository<UserQuestion, Long>{
 	List<UserQuestion> findAllByUserId(Long userId);
+
+	void deleteAllByUserId(Long userId);
 }

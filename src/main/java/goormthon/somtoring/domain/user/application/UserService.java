@@ -52,7 +52,7 @@ public class UserService {
 	}
 
 	@Transactional
-	public UserDetailResponse getUserMe(Long userId) {
+	public UserDetailResponse getUser(Long userId) {
 		User user = getByUserId(userId);
 		if (user.getVarki() == null) userQuestionService.calculateVarki(user);
 		return UserDetailResponse.from(user);
@@ -64,6 +64,13 @@ public class UserService {
 		List<User> mentors = userRepository.findAllByRoleAndVarki(MENTOR, myVarki);
 		return UserSummaryListResponse.from(mentors);
 
+	}
+
+	@Transactional
+	public void deleteVarki(Long userId) {
+		User user = getByUserId(userId);
+		user.getVarki().delete();
+		userQuestionService.deleteAllUserQuestions(userId);
 	}
 
 	public User getByUserId(Long userId) {
