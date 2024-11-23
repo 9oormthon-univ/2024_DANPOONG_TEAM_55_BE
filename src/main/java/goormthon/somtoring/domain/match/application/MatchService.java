@@ -1,5 +1,6 @@
 package goormthon.somtoring.domain.match.application;
 
+import goormthon.somtoring.domain.user.presentation.response.UserSummaryListResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +12,8 @@ import goormthon.somtoring.domain.user.application.UserService;
 import goormthon.somtoring.domain.user.domain.user.Role;
 import goormthon.somtoring.domain.user.domain.user.User;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -41,5 +44,16 @@ public class MatchService {
 	private Match getMatchById(Long matchId) {
 		return matchRepository.findById(matchId)
 			.orElseThrow(MatchNotFoundException::new);
+	}
+
+	@Transactional(readOnly = true)
+	public UserSummaryListResponse getMatchedMentors(Long menteeId) {
+		List<Match> matches = matchRepository.findAllByMenteeIdAndIsAcceptedTrue(menteeId);
+
+		List<User> mentors = matches.stream()
+				.map(Match::getMentor)
+				.toList();
+
+		return UserSummaryListResponse.from(mentors);
 	}
 }

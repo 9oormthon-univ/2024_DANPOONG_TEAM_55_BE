@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import goormthon.somtoring.domain.match.domain.MatchRepository;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -21,5 +22,10 @@ public class MatchRepositoryImpl implements MatchRepository {
 	@Override
 	public Optional<Match> findById(Long matchId) {
 		return matchJpaRepository.findById(matchId);
+	}
+
+	@Override
+	public List<Match> findAllByMenteeIdAndIsAcceptedTrue(Long menteeId) {
+		return matchJpaRepository.findAllByMenteeIdAndIsAcceptedTrue(menteeId);
 	}
 }
