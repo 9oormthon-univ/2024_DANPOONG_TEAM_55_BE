@@ -15,10 +15,6 @@ public class TagService {
 
     private final TagRepository tagRepository;
 
-    public Tag getTagId(Long tagId) {
-        return tagRepository.findById(tagId).orElseThrow(TagNotFoundException::new);
-    }
-
     @Transactional(readOnly = true)
     public List<Tag> getAllTags() {
         return tagRepository.findAll();

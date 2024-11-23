@@ -5,9 +5,10 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
+@Builder
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Getter
 public class Tag extends BaseTimeEntity {
 
     @Id
@@ -20,12 +21,8 @@ public class Tag extends BaseTimeEntity {
 
     private String content;
 
-    private int score;
-
-    @Builder
-    public Tag(TagType tagType, String content, int score) {
+    public Tag(TagType tagType, String content) {
         this.tagType = tagType;
         this.content = content;
-        this.score = score;
     }
 }
