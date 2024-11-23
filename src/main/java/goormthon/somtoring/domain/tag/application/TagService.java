@@ -12,10 +12,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class TagService {
-
     private final TagRepository tagRepository;
 
-    @Transactional(readOnly = true)
     public List<Tag> getAllTags() {
         return tagRepository.findAll();
     }
