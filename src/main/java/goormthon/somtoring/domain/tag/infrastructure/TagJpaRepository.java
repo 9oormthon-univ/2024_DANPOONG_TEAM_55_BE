@@ -1,8 +1,12 @@
 package goormthon.somtoring.domain.tag.infrastructure;
 
 import goormthon.somtoring.domain.tag.domain.Tag;
+import goormthon.somtoring.domain.tag.domain.TagType;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TagJpaRepository extends JpaRepository<Tag, Long> {
+import java.util.List;
 
+public interface TagJpaRepository extends JpaRepository<Tag, Long> {
+    List<Tag> findByIdIn(List<Long> tagIds);
 }

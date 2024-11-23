@@ -8,4 +8,6 @@ public interface TagRepository {
     Optional<Tag> findById(Long tagId);
 
     List<Tag> findAll();
+
+    List<Tag> findByIdIn(List<Long> tagIds);
 }

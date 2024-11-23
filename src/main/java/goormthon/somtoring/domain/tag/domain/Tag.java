@@ -1,8 +1,11 @@
 package goormthon.somtoring.domain.tag.domain;
 
 import goormthon.somtoring.common.domain.BaseTimeEntity;
+import goormthon.somtoring.domain.evaluateTag.domain.EvaluateTag;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Builder
@@ -10,6 +13,7 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Tag extends BaseTimeEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

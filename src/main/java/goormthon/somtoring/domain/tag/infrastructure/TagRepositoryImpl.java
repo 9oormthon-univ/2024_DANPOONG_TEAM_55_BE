@@ -2,6 +2,7 @@ package goormthon.somtoring.domain.tag.infrastructure;
 
 import goormthon.somtoring.domain.tag.domain.Tag;
 import goormthon.somtoring.domain.tag.domain.TagRepository;
+import goormthon.somtoring.domain.tag.domain.TagType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +12,6 @@ import java.util.Optional;
 @Repository
 @RequiredArgsConstructor
 public class TagRepositoryImpl implements TagRepository {
-
     private final TagJpaRepository tagJpaRepository;
 
     @Override
@@ -22,5 +22,10 @@ public class TagRepositoryImpl implements TagRepository {
     @Override
     public List<Tag> findAll() {
         return tagJpaRepository.findAll();
+    }
+
+    @Override
+    public List<Tag> findByIdIn(List<Long> tagIds) {
+        return tagJpaRepository.findByIdIn(tagIds);
     }
 }
