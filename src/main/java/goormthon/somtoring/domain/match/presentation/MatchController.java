@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import goormthon.somtoring.common.resolver.UserId;
 import goormthon.somtoring.domain.match.application.MatchService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +43,7 @@ public class MatchController {
 	}
 
 	@Operation(summary = "매칭된 멘토 리스트 조회", description = "멘티가 매칭된 멘토 리스트를 조회합니다.")
-	@ApiResponse(responseCode = "200", description = "매칭된 멘토 리스트 반환")
+	@ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = UserSummaryListResponse.class)))
 	@GetMapping
 	public ResponseEntity<UserSummaryListResponse> getMatchedMentors(
 			@UserId Long userId
