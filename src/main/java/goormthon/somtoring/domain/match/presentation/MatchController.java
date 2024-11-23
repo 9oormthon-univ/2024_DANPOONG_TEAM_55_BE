@@ -33,12 +33,23 @@ public class MatchController {
 
 	@Operation(summary = "멘토링 승인", description = "멘토가 멘토링 신청을 승인합니다.")
 	@ApiResponse(responseCode = "204")
-	@PatchMapping("/{matchId}")
+	@PatchMapping("/{matchId}/approve")
 	public ResponseEntity<Void> approveMentoring(
 		@UserId Long userId,
 		@PathVariable Long matchId
 	) {
 		matchService.approveMentoring(userId, matchId);
+		return ResponseEntity.noContent().build();
+	}
+
+	@Operation(summary = "멘토링 거절", description = "멘토가 멘토링 신청을 거절합니다.")
+	@ApiResponse(responseCode = "204")
+	@PatchMapping("/{matchId}/reject")
+	public ResponseEntity<Void> rejectMentoring(
+		@UserId Long userId,
+		@PathVariable Long matchId
+	) {
+		matchService.rejectMentoring(userId, matchId);
 		return ResponseEntity.noContent().build();
 	}
 

@@ -9,5 +9,5 @@ public interface MatchRepository {
 
     Optional<Match> findById(Long matchId);
 
-    List<Match> findAllByMenteeIdAndIsAcceptedTrue(Long menteeId);
+    List<Match> findAllByMenteeIdAndStatus(Long menteeId, Status status);
 }
