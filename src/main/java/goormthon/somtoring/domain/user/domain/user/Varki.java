@@ -21,4 +21,12 @@ public class Varki {
 		varki.i = i;
 		return varki;
 	}
+
+	public void delete() {
+		this.v = 0;
+		this.a = 0;
+		this.r = 0;
+		this.k = 0;
+		this.i = 0;
+	}
 }

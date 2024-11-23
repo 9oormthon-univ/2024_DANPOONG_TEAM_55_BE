@@ -1,6 +1,7 @@
 package goormthon.somtoring.domain.user.presentation;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -83,6 +84,14 @@ public class UserController {
 	public ResponseEntity<UserSummaryListResponse> getMentors(@UserId Long userId) {
 		UserSummaryListResponse response = userService.getMentors(userId);
 		return ResponseEntity.ok(response);
+	}
+
+	@Operation(summary = "내 VARKI 검사 내역 삭제", description = "내 VARKI 검사 내역을 삭제합니다.")
+	@ApiResponse(responseCode = "204")
+	@DeleteMapping
+	public ResponseEntity<Void> deleteVarki(@UserId Long userId) {
+		userService.deleteVarki(userId);
+		return ResponseEntity.noContent().build();
 	}
 
 }
