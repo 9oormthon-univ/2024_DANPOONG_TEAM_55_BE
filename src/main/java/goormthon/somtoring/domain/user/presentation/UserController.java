@@ -3,6 +3,7 @@ package goormthon.somtoring.domain.user.presentation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,7 +46,15 @@ public class UserController {
 	@ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = UserDetailResponse.class)))
 	@GetMapping("/me")
 	public ResponseEntity<UserDetailResponse> getUser(@UserId Long userId) {
-		UserDetailResponse response = userService.getUserMe(userId);
+		UserDetailResponse response = userService.getUser(userId);
+		return ResponseEntity.ok(response);
+	}
+
+	@Operation(summary = "프로필 정보 조회", description = "유저의 프로필 기본 정보 및 varki 지수를 조회합니다.")
+	@ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = UserDetailResponse.class)))
+	@GetMapping("/{userId}")
+	public ResponseEntity<UserDetailResponse> getUserById(@PathVariable Long userId) {
+		UserDetailResponse response = userService.getUser(userId);
 		return ResponseEntity.ok(response);
 	}
 
