@@ -23,4 +23,9 @@ public class TagRepositoryImpl implements TagRepository {
     public List<Tag> findAll() {
         return tagJpaRepository.findAll();
     }
+
+    @Override
+    public List<Tag> findByIdIn(List<Long> tagIds) {
+        return tagJpaRepository.findByIdIn(tagIds);
+    }
 }

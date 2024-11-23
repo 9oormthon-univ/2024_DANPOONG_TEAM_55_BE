@@ -1,31 +1,29 @@
-package goormthon.somtoring.domain.tag.domain;
+package goormthon.somtoring.domain.evaluate.domain;
 
 import goormthon.somtoring.common.domain.BaseTimeEntity;
 import goormthon.somtoring.domain.evaluateTag.domain.EvaluateTag;
+import goormthon.somtoring.domain.user.domain.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
 
 @Entity
-@Builder
-@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Tag extends BaseTimeEntity {
+@Builder
+@Getter
+public class Evaluate extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private TagType tagType;
+    @ManyToOne
+    @JoinColumn(name = "mentor_id")
+    private User mentor;
 
-    private String content;
-
-    public Tag(TagType tagType, String content) {
-        this.tagType = tagType;
-        this.content = content;
-    }
+    @ManyToOne
+    @JoinColumn(name = "mentee_id")
+    private User mentee;
 }

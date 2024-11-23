@@ -1,6 +1,8 @@
 package goormthon.somtoring.domain.evaluate.presentation;
 
+import goormthon.somtoring.common.resolver.UserId;
 import goormthon.somtoring.domain.evaluate.application.EvaluateService;
+import goormthon.somtoring.domain.evaluate.presentation.request.EvaluateRequest;
 import goormthon.somtoring.domain.evaluate.presentation.response.EvaluateSelectResponse;
 import goormthon.somtoring.domain.user.presentation.response.UserDetailResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,10 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,5 +28,13 @@ public class EvaluateController {
     public ResponseEntity<EvaluateSelectResponse> getMentorForEvaluate(@RequestParam Long mentorId) {
         EvaluateSelectResponse response = evaluateService.getMentorForEvaluate(mentorId);
         return ResponseEntity.ok(response);
+    }
+
+    @Operation(summary = "멘토 평가 저장", description = "멘티가 특정 멘토에 대한 평가를 저장합니다.")
+    @ApiResponse(responseCode = "201", content = @Content(schema = @Schema(implementation = EvaluateRequest.class)))
+    @PostMapping("/create")
+    public ResponseEntity<Void> evaluateMentor(@UserId Long userId, @RequestParam Long mentorId, @RequestBody EvaluateRequest evaluateRequest) {
+        evaluateService.evaluateMentor(userId, mentorId, evaluateRequest.tagIds());
+        return ResponseEntity.status(201).build();
     }
 }
