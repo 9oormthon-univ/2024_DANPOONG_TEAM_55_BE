@@ -45,3 +45,10 @@ INSERT INTO user_tag (user_id, content) VALUES
 (5, '친절한'),
 (5, '유쾌한'),
 (5, '편안한');
+
+INSERT INTO mentoring (title, mentor_id, profile_img_url, created_at, updated_at) VALUES
+('웹프로그래밍 왕초보 수업', 1, '/example/profile.png', NOW(), NOW()),
+('피그마로 컨텐츠 제작하기', 2, '/example/profile.png', NOW(), NOW()),
+('스프링으로 백엔드 개발', 3, '/example/profile.png', NOW(), NOW()),
+('next vercel을 통한 배포 구현하기', 4, '/example/profile.png', NOW(), NOW()),
+('구름톤 이렇게 하면 성공한다', 5, '/example/profile.png', NOW(), NOW());
