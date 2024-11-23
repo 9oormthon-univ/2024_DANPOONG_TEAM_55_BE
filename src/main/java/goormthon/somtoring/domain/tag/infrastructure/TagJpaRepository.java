@@ -1,6 +1,8 @@
 package goormthon.somtoring.domain.tag.infrastructure;
 
 import goormthon.somtoring.domain.tag.domain.Tag;
+import goormthon.somtoring.domain.tag.domain.TagType;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

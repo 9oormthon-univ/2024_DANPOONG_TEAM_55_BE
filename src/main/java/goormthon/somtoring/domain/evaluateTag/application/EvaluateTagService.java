@@ -19,13 +19,9 @@ public class EvaluateTagService {
 
     @Transactional
     public void saveEvaluateTags(Evaluate evaluate, List<Tag> tags) {
-        for (Tag tag : tags) {
-            EvaluateTag evaluateTag = createEvaluateTag(evaluate, tag);
+        tags.forEach(tag -> {
+            EvaluateTag evaluateTag = EvaluateTag.of(evaluate, tag);
             evaluateTagRepository.save(evaluateTag);
-        }
-    }
-
-    private EvaluateTag createEvaluateTag(Evaluate evaluate, Tag tag) {
-        return EvaluateTag.of(evaluate, tag);
+        });
     }
 }

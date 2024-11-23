@@ -26,4 +26,14 @@ public class Evaluate extends BaseTimeEntity {
     @ManyToOne
     @JoinColumn(name = "mentee_id")
     private User mentee;
+
+    @OneToMany(mappedBy = "evaluate")
+    private List<EvaluateTag> evaluateTags;
+
+    public static Evaluate of(User mentor, User mentee) {
+        return Evaluate.builder()
+            .mentor(mentor)
+            .mentee(mentee)
+            .build();
+    }
 }
