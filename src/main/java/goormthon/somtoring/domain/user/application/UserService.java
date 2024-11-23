@@ -66,6 +66,13 @@ public class UserService {
 
 	}
 
+	@Transactional
+	public void deleteVarki(Long userId) {
+		User user = getByUserId(userId);
+		user.getVarki().delete();
+		userQuestionService.deleteAllUserQuestions(userId);
+	}
+
 	public User getByUserId(Long userId) {
 		return userRepository.findById(userId)
 			.orElseThrow(UserNotFoundException::new);

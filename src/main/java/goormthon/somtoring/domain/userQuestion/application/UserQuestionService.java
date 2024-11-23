@@ -52,4 +52,8 @@ public class UserQuestionService {
 		Varki varki = Varki.of(v, a, r, k, i);
 		user.updateVarki(varki);
 	}
+
+	public void deleteAllUserQuestions(Long userId) {
+		userQuestionRepository.deleteAllByUserId(userId);
+	}
 }
