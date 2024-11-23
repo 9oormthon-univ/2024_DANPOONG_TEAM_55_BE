@@ -4,6 +4,7 @@ import goormthon.somtoring.domain.match.domain.Match;
 import org.springframework.stereotype.Repository;
 
 import goormthon.somtoring.domain.match.domain.MatchRepository;
+import goormthon.somtoring.domain.match.domain.Status;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class MatchRepositoryImpl implements MatchRepository {
 	}
 
 	@Override
-	public List<Match> findAllByMenteeIdAndIsAcceptedTrue(Long menteeId) {
-		return matchJpaRepository.findAllByMenteeIdAndIsAcceptedTrue(menteeId);
+	public List<Match> findAllByMenteeIdAndStatus(Long menteeId, Status status) {
+		return matchJpaRepository.findAllByMenteeIdAndStatus(menteeId, status);
 	}
 }

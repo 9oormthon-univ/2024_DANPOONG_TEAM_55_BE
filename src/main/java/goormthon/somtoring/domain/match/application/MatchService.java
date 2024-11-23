@@ -1,5 +1,6 @@
 package goormthon.somtoring.domain.match.application;
 
+import goormthon.somtoring.domain.match.domain.Status;
 import goormthon.somtoring.domain.user.presentation.response.UserSummaryListResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,12 +49,10 @@ public class MatchService {
 
 	@Transactional(readOnly = true)
 	public UserSummaryListResponse getMatchedMentors(Long menteeId) {
-		List<Match> matches = matchRepository.findAllByMenteeIdAndIsAcceptedTrue(menteeId);
-
+		List<Match> matches = matchRepository.findAllByMenteeIdAndStatus(menteeId, Status.ACCEPTED);
 		List<User> mentors = matches.stream()
 				.map(Match::getMentor)
 				.toList();
-
 		return UserSummaryListResponse.from(mentors);
 	}
 }

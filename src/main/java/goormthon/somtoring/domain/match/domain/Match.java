@@ -4,6 +4,8 @@ import goormthon.somtoring.common.domain.BaseTimeEntity;
 import goormthon.somtoring.domain.match.presentation.exception.AlreadyAcceptedMatchException;
 import goormthon.somtoring.domain.user.domain.user.User;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -36,19 +38,24 @@ public class Match extends BaseTimeEntity {
 	@JoinColumn(name = "mentee_id")
 	private User mentee;
 
-	private boolean isAccepted;
+	@Enumerated(EnumType.STRING)
+	private Status status;
 
 	public static Match of(User mentor, User mentee) {
 		return Match.builder()
 			.mentor(mentor)
 			.mentee(mentee)
-			.isAccepted(false)
+			.status(Status.WAITING)
 			.build();
 	}
 
 	public void accept() {
-		if(this.isAccepted) throw new AlreadyAcceptedMatchException();
-		this.isAccepted = true;
+		if(this.status == Status.ACCEPTED) throw new AlreadyAcceptedMatchException();
+		this.status = Status.ACCEPTED;
+	}
+
+	public void reject() {
+		this.status = Status.REJECTED;
 	}
 
 	public boolean isMentor(User user) {
