@@ -46,7 +46,7 @@ public class MatchService {
 			.orElseThrow(MatchNotFoundException::new);
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public UserSummaryListResponse getMatchedMentors(Long menteeId) {
 		List<Match> matches = matchRepository.findAllByMenteeIdAndIsAcceptedTrue(menteeId);
 

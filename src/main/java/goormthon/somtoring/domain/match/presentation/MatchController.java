@@ -42,7 +42,7 @@ public class MatchController {
 
 	@Operation(summary = "매칭된 멘토 리스트 조회", description = "멘티가 매칭된 멘토 리스트를 조회합니다.")
 	@ApiResponse(responseCode = "200", description = "매칭된 멘토 리스트 반환")
-	@GetMapping("/")
+	@GetMapping
 	public ResponseEntity<UserSummaryListResponse> getMatchedMentors(
 			@UserId Long userId
 	) {
